@@ -1,4 +1,4 @@
-# Passport-Intuit
+# Passport-Intuit-OAuth
 
 [Passport](http://passportjs.org/) strategy for authenticating with [Intuit](http://www.intuit.com/)
 using the OAuth 1.0a API.
