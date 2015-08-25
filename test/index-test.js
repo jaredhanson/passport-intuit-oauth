@@ -1,7 +1,7 @@
 var vows = require('vows');
 var assert = require('assert');
 var util = require('util');
-var intuit = require('passport-intuit-oauth');
+var intuit = require('..');
 
 
 vows.describe('passport-intuit-oauth').addBatch({
