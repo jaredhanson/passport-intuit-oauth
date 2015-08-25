@@ -1,6 +1,6 @@
 {
   "name": "passport-intuit-oauth",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Intuit (OAuth) authentication strategy for Passport.",
   "keywords": ["passport", "intuit", "auth", "authn", "authentication", "identity"],
   "repository": {
