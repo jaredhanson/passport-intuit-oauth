@@ -7,9 +7,6 @@ var intuit = require('..');
 vows.describe('passport-intuit-oauth').addBatch({
   
   'module': {
-    'should report a version': function (x) {
-      assert.isString(intuit.version);
-    },
   },
   
 }).export(module);
