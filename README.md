@@ -22,17 +22,35 @@ account and OAuth tokens.  The strategy requires a `verify` callback, which
 accepts these credentials and calls `done` providing a user, as well as
 `options` specifying a consumer key, consumer secret, and callback URL.
 
+```JS
+    const passport = require('passport');
+    const IntuitStrategy = require('passport-intuit-oauth').Strategy;
+
+    // this project requires sessions
+    const session = require('express-session');
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use(session({
+      resave: false,
+      saveUninitialized: true,
+      secret: 'secret'
+    }));
+
     passport.use(new IntuitStrategy({
         consumerKey: INTUIT_CONSUMER_KEY,
         consumerSecret: INTUIT_CONSUMER_SECRET,
         callbackURL: "http://127.0.0.1:3000/auth/intuit/callback"
       },
       function(token, tokenSecret, profile, done) {
+        // this method is called by the passport middleware on the /auth/intuit/callback route
         User.findOrCreate({ intuitId: profile.id }, function (err, user) {
           return done(err, user);
         });
       }
     ));
+```
 
 #### Authenticate Requests
 
@@ -42,15 +60,18 @@ authenticate requests.
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
+```JS
     app.get('/auth/intuit',
       passport.authenticate('intuit'));
     
     app.get('/auth/intuit/callback', 
+      // this middleware will call function(token, tokenSecret, profile, done) from your Strategy config
       passport.authenticate('intuit', { failureRedirect: '/login' }),
       function(req, res) {
         // Successful authentication, redirect home.
         res.redirect('/');
       });
+```
 
 ## Examples
 
